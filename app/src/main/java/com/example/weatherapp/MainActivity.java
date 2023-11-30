@@ -16,14 +16,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,6 +39,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Aktivoidaan picasson logit logcattiin
+        Picasso.Builder builder = new Picasso.Builder(this);
+        builder.loggingEnabled(true);
+        Picasso.setSingletonInstance(builder.build());
     }
 
     public void getWeatherData(View view) {
@@ -48,12 +52,18 @@ public class MainActivity extends AppCompatActivity {
 
         cityName = cityEditText.getText().toString();
         Log.d("LENGHT", "lenght" + cityName.length());
-        // Jos kaupunkia ei asetettu, haetaan paikkatiedoilla
+        // Jos kaupunkia ei asetettu, ilmoitetaan siitä
         if(cityName.length() == 0) {
-            startGPS();
+            //startGPS();
+            TextView cityNameTextView = findViewById(R.id.mainPageInfoTextView);
+            cityNameTextView.setText("Kaupunkia ei asetettu");
         }
         // Jos haettava kaupunki asetettu
         else {
+            // Asetetaan ruudulle lataus kuvake
+            ImageView weatherStateImageView = findViewById(R.id.weatherStateImageView);
+            weatherStateImageView.setImageResource(R.mipmap.loading);
+
             fetchWeatherDataByCity(cityName);
         }
     }
@@ -63,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         unitType = sharedPreferences.getString("UNIT_TYPE", "metric");
         switchState = sharedPreferences.getBoolean("SWITCH_STATE", false);
+
+        // Luodaan URL
         String WEATHER_URL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=2f5fbf5c80f0727b778de804be6d4fa8&units=" + unitType;
         makeWeatherAPIRequest(WEATHER_URL);
     }
@@ -72,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         unitType = sharedPreferences.getString("UNIT_TYPE", "metric");
         switchState = sharedPreferences.getBoolean("SWITCH_STATE", false);
+
+        // Luodaan URL
         String WEATHER_URL = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=2f5fbf5c80f0727b778de804be6d4fa8&units=" + unitType;
         makeWeatherAPIRequest(WEATHER_URL);
     }
@@ -93,25 +107,31 @@ public class MainActivity extends AppCompatActivity {
         // Parsetaan JSON ja päivitetään näytölle lämpötila, säätila ja tuulen nopeus
         // Muunnetaan merkkijono JSON objektiksi
         try {
+            // Haetaan säädata JSONObjektista
             JSONObject weatherJSON = new JSONObject(response);
             String city = weatherJSON.getString("name");
-            String weather = weatherJSON.getJSONArray("weather").getJSONObject(0).getString("main");
             double temperature = weatherJSON.getJSONObject("main").getDouble("temp");
             double wind = weatherJSON.getJSONObject("wind").getDouble("speed");
+            String icon = weatherJSON.getJSONArray("weather").getJSONObject(0).getString("icon");
 
+            // Haetaan sää kuvake
+            ImageView weatherStateImageView = findViewById(R.id.weatherStateImageView);
+            String weatherStateImageUrl = "https://openweathermap.org/img/wn/" + icon + "@4x.png";
+
+            // Ladataan sää kuvake näytölle
+            Picasso.get()
+                    .load(weatherStateImageUrl)
+                    .into(weatherStateImageView);
+
+            // Päivitetään säätiedot näytölle
             TextView cityNameTextView = findViewById(R.id.cityNameTextView);
             cityNameTextView.setText(city);
-            TextView weatherTextView = findViewById(R.id.weatherTextView);
-            weatherTextView.setText(weather);
+
             TextView temperatureTextView = findViewById(R.id.temperatureTextView);
+            temperatureTextView.setText("" + temperature + (switchState ? "°F" : "°C"));
+
             TextView windTextView = findViewById(R.id.windTextView);
-            if(switchState == false) {
-                temperatureTextView.setText("" + temperature + "°C");
-                windTextView.setText("" + wind + " m/s");
-            } else {
-                temperatureTextView.setText("" + temperature + "°F");
-                windTextView.setText("" + wind + " mph");
-            }
+            windTextView.setText("" + wind + (switchState ? " mph" : " m/s"));
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
@@ -138,7 +158,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent); // Tämä komento käynnistää aktiviteetin
     }
 
-    public void startGPS() {
+    public void startGPS(View view) {
+        // Asetetaan ruudulle lataus kuvake
+        ImageView weatherStateImageView = findViewById(R.id.weatherStateImageView);
+        weatherStateImageView.setImageResource(R.mipmap.loading);
         // Tsekataan, onko oikeudet paikkatietoon, jos ei ole, pyyde-tään oikeudet dialogilla
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // Ei oikeuksia, joten pyydetään oikeudet

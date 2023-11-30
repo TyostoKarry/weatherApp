@@ -21,11 +21,22 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/infoTextView"
+        android:id="@+id/unitTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="150dp"
         android:text="Mittayksikkö"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pageInfoTextView" />
+
+    <TextView
+        android:id="@+id/pageInfoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Asetukset"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,31 +46,31 @@
         android:id="@+id/unitSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="32dp"
         android:textSize="34sp"
         app:layout_constraintEnd_toStartOf="@+id/imperialTextView"
         app:layout_constraintStart_toEndOf="@+id/metricTextView"
-        app:layout_constraintTop_toBottomOf="@+id/infoTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/unitTextView" />
 
     <TextView
         android:id="@+id/metricTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="32dp"
         android:text="Metric"
         android:textSize="34sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/infoTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/unitTextView" />
 
     <TextView
         android:id="@+id/imperialTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:text="Imperial"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/infoTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/unitTextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

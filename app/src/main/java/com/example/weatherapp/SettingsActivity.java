@@ -47,8 +47,6 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void backToMain(View view) {
-
-
         // Takaisin päänäkymään
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
