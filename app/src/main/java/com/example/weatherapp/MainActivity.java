@@ -46,6 +46,22 @@ public class MainActivity extends AppCompatActivity {
         Picasso.setSingletonInstance(builder.build());
     }
 
+    public void setLoadingState() {
+        // Asetetaan ruudulle lataus kuvake
+        ImageView weatherStateImageView = findViewById(R.id.weatherStateImageView);
+        weatherStateImageView.setImageResource(R.mipmap.loading);
+
+        // Tyhjennetään säädata tekstikentät
+        TextView cityNameTextView = findViewById(R.id.cityNameTextView);
+        cityNameTextView.setText("");
+
+        TextView temperatureTextView = findViewById(R.id.temperatureTextView);
+        temperatureTextView.setText("");
+
+        TextView windTextView = findViewById(R.id.windTextView);
+        windTextView.setText("");
+    }
+
     public void getWeatherData(View view) {
         // Haetaan haluttu kaupunki cityEditText kentästä
         EditText cityEditText = findViewById(R.id.cityEditText);
@@ -60,9 +76,8 @@ public class MainActivity extends AppCompatActivity {
         }
         // Jos haettava kaupunki asetettu
         else {
-            // Asetetaan ruudulle lataus kuvake
-            ImageView weatherStateImageView = findViewById(R.id.weatherStateImageView);
-            weatherStateImageView.setImageResource(R.mipmap.loading);
+            // Alustetaan ruutu
+            setLoadingState();
 
             fetchWeatherDataByCity(cityName);
         }
@@ -159,9 +174,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startGPS(View view) {
-        // Asetetaan ruudulle lataus kuvake
-        ImageView weatherStateImageView = findViewById(R.id.weatherStateImageView);
-        weatherStateImageView.setImageResource(R.mipmap.loading);
+        // Alustetaan ruutu
+        setLoadingState();
         // Tsekataan, onko oikeudet paikkatietoon, jos ei ole, pyyde-tään oikeudet dialogilla
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // Ei oikeuksia, joten pyydetään oikeudet
