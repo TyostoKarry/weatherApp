@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SääSovellus</string>
+    <string name="weather_app">Sää sovellus</string>
+    <string name="get_local_weather">Hae paikallinen sää</string>
+    <string name="get_weather_based_on_city">Hae sää kaupungin perusteella</string>
+    <string name="open_foreca">Avaa Foreca</string>
+    <string name="city">kaupunki</string>
+    <string name="opens_settings">Avaa asetukset</string>
+    <string name="weather_state">Sään tila</string>
+    <string name="back">Takaisin</string>
+    <string name="unit_type">Mittayksikkö</string>
+    <string name="settings">Asetukset</string>
+    <string name="metric">Eurooppa</string>
+    <string name="imperial">Amerikka</string>
+    <string name="city_not_set">Kaupunkia ei asetettu</string>
+    <string name="temperature">Lämpötila</string>
+    <string name="wind_speed">Tuulen nopeus</string>
+</resources>

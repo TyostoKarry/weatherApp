@@ -57,22 +57,27 @@ public class MainActivity extends AppCompatActivity {
 
         TextView temperatureTextView = findViewById(R.id.temperatureTextView);
         temperatureTextView.setText("");
+        TextView temperatureInfoTextView = findViewById(R.id.temperatureInfoTextView);
+        temperatureInfoTextView.setText("");
 
         TextView windTextView = findViewById(R.id.windTextView);
         windTextView.setText("");
+        TextView windSpeedInfoTextView = findViewById(R.id.windSpeedInfoTextView);
+        windSpeedInfoTextView.setText("");
     }
 
     public void getWeatherData(View view) {
         // Haetaan haluttu kaupunki cityEditText kentästä
         EditText cityEditText = findViewById(R.id.cityEditText);
-
         cityName = cityEditText.getText().toString();
         Log.d("LENGHT", "lenght" + cityName.length());
+
         // Jos kaupunkia ei asetettu, ilmoitetaan siitä
         if(cityName.length() == 0) {
-            //startGPS();
-            TextView cityNameTextView = findViewById(R.id.mainPageInfoTextView);
-            cityNameTextView.setText("Kaupunkia ei asetettu");
+            // Ilmoitetaan ettei haettavaa kaupunkia ole asetettu
+            TextView cityNameTextView = findViewById(R.id.cityNameTextView);
+            String cityNotSetText = getResources().getString(R.string.city_not_set);
+            cityNameTextView.setText(cityNotSetText);
         }
         // Jos haettava kaupunki asetettu
         else {
@@ -143,10 +148,16 @@ public class MainActivity extends AppCompatActivity {
             cityNameTextView.setText(city);
 
             TextView temperatureTextView = findViewById(R.id.temperatureTextView);
+            TextView temperatureInfoTextView = findViewById(R.id.temperatureInfoTextView);
+            String temperatureInfoText = getResources().getString(R.string.temperature);
             temperatureTextView.setText("" + temperature + (switchState ? "°F" : "°C"));
+            temperatureInfoTextView.setText(temperatureInfoText);
 
             TextView windTextView = findViewById(R.id.windTextView);
+            TextView windSpeedInfoTextView = findViewById(R.id.windSpeedInfoTextView);
+            String windSpeedInfoText = getResources().getString(R.string.wind_speed);
             windTextView.setText("" + wind + (switchState ? " mph" : " m/s"));
+            windSpeedInfoTextView.setText(windSpeedInfoText);
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }

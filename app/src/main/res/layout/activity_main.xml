@@ -14,7 +14,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Sää sovellus"
+        android:text="@string/weather_app"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +60,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:onClick="getWeatherData"
-        android:text="Hae asetetun kaupungin säätiedot"
+        android:text="@string/get_weather_based_on_city"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/localWeatherDataButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +75,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:onClick="startGPS"
-        android:text="Hae paikalliset säätiedot"
+        android:text="@string/get_local_weather"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/openSettingsButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -90,7 +90,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="30dp"
         android:onClick="openForeca"
-        android:text="Avaa forecan sivut"
+        android:text="@string/open_foreca"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -105,7 +105,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
-        android:hint="Kaupunki"
+        android:hint="@string/city"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/weatherDataButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -118,7 +118,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/mainBackground"
-        android:contentDescription="opens settings"
+        android:contentDescription="@string/opens_settings"
         android:onClick="openSettings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -129,8 +129,29 @@
         android:layout_width="150sp"
         android:layout_height="150sp"
         android:layout_marginTop="8dp"
+        android:contentDescription="@string/weather_state"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cityNameTextView" />
+
+    <TextView
+        android:id="@+id/windSpeedInfoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/windTextView"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/temperatureInfoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="8dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/temperatureTextView"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
