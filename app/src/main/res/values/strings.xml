@@ -15,4 +15,5 @@
     <string name="city_not_set">City not set</string>
     <string name="temperature">temperature</string>
     <string name="wind_speed">Wind speed</string>
+    <string name="api_error">Error connecting to the API</string>
 </resources>

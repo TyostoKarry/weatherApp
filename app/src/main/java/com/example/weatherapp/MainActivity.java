@@ -46,11 +46,7 @@ public class MainActivity extends AppCompatActivity {
         Picasso.setSingletonInstance(builder.build());
     }
 
-    public void setLoadingState() {
-        // Asetetaan ruudulle lataus kuvake
-        ImageView weatherStateImageView = findViewById(R.id.weatherStateImageView);
-        weatherStateImageView.setImageResource(R.mipmap.loading);
-
+    public void clearWeatherInfo() {
         // Tyhjennetään säädata tekstikentät
         TextView cityNameTextView = findViewById(R.id.cityNameTextView);
         cityNameTextView.setText("");
@@ -64,6 +60,16 @@ public class MainActivity extends AppCompatActivity {
         windTextView.setText("");
         TextView windSpeedInfoTextView = findViewById(R.id.windSpeedInfoTextView);
         windSpeedInfoTextView.setText("");
+
+        // Tyhjennetään sään tilan kuva
+        ImageView weatherStateImageView = findViewById(R.id.weatherStateImageView);
+        weatherStateImageView.setImageDrawable(null);
+    }
+
+    public void setLoadingState() {
+        // Asetetaan ruudulle lataus kuvake
+        ImageView weatherStateImageView = findViewById(R.id.weatherStateImageView);
+        weatherStateImageView.setImageResource(R.mipmap.loading);
     }
 
     public void getWeatherData(View view) {
@@ -71,6 +77,9 @@ public class MainActivity extends AppCompatActivity {
         EditText cityEditText = findViewById(R.id.cityEditText);
         cityName = cityEditText.getText().toString();
         Log.d("LENGHT", "lenght" + cityName.length());
+
+        // Alustetaan ruutu
+        clearWeatherInfo();
 
         // Jos kaupunkia ei asetettu, ilmoitetaan siitä
         if(cityName.length() == 0) {
@@ -81,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         }
         // Jos haettava kaupunki asetettu
         else {
-            // Alustetaan ruutu
+            // Asetetaan lataus kuvake
             setLoadingState();
 
             fetchWeatherDataByCity(cityName);
@@ -117,7 +126,10 @@ public class MainActivity extends AppCompatActivity {
                     parseWeatherJsonAndUpdateUi(response);
                 },
                 error -> {
-                    // Verkkovirhe yms
+                    // Ilmoitetaan ongelmasta yhdistää API:in
+                    TextView cityNameTextView = findViewById(R.id.cityNameTextView);
+                    String apiError = getResources().getString(R.string.api_error);
+                    cityNameTextView.setText(apiError);
                 });
         // Lähetetään request Volleyllä == lisätään request requestqueueen
         Volley.newRequestQueue(this).add(request);
@@ -186,6 +198,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void startGPS(View view) {
         // Alustetaan ruutu
+        clearWeatherInfo();
         setLoadingState();
         // Tsekataan, onko oikeudet paikkatietoon, jos ei ole, pyyde-tään oikeudet dialogilla
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
