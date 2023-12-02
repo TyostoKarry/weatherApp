@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     public void setLoadingState() {
         // Asetetaan ruudulle lataus kuvake
         ImageView weatherStateImageView = findViewById(R.id.weatherStateImageView);
-        weatherStateImageView.setImageResource(R.mipmap.loading);
+        weatherStateImageView.setImageResource(R.drawable.loading);
     }
 
     public void getWeatherData(View view) {

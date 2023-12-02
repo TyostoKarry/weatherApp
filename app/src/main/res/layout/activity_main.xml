@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mainBackground"
+    android:background="@drawable/background"
     tools:context=".MainActivity">
 
     <TextView
@@ -15,7 +15,9 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="@string/weather_app"
+        android:textColor="@color/black"
         android:textSize="34sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,6 +29,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
+        android:textColor="@color/black"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,6 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginBottom="48dp"
+        android:textColor="@color/black"
         android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/cityEditText"
         app:layout_constraintStart_toStartOf="parent" />
@@ -48,6 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="48dp"
+        android:textColor="@color/black"
         android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/cityEditText"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -59,9 +64,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/buttonColor"
         android:onClick="getWeatherData"
         android:text="@string/get_weather_based_on_city"
-        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/localWeatherDataButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -74,8 +81,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/buttonColor"
         android:onClick="startGPS"
         android:text="@string/get_local_weather"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/openSettingsButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -88,9 +97,11 @@
         android:layout_height="64dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/buttonColor"
         android:onClick="openForeca"
         android:text="@string/open_foreca"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -113,16 +124,17 @@
 
     <ImageButton
         android:id="@+id/openSettingsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="64sp"
+        android:layout_height="64sp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/mainBackground"
+        android:background="@android:color/transparent"
         android:contentDescription="@string/opens_settings"
+        android:scaleType="centerInside"
         android:onClick="openSettings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@mipmap/settings" />
+        app:srcCompat="@drawable/settings" />
 
     <ImageView
         android:id="@+id/weatherStateImageView"
@@ -140,6 +152,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="8dp"
+        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/windTextView"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -150,6 +163,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginBottom="8dp"
+        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/temperatureTextView"
         app:layout_constraintStart_toStartOf="parent" />
