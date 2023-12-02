@@ -130,6 +130,9 @@ public class MainActivity extends AppCompatActivity {
                     TextView cityNameTextView = findViewById(R.id.cityNameTextView);
                     String apiError = getResources().getString(R.string.api_error);
                     cityNameTextView.setText(apiError);
+                    // Asetetaan ruudulle virhe kuvake
+                    ImageView weatherStateImageView = findViewById(R.id.weatherStateImageView);
+                    weatherStateImageView.setImageResource(R.drawable.error_image);
                 });
         // Lähetetään request Volleyllä == lisätään request requestqueueen
         Volley.newRequestQueue(this).add(request);
@@ -153,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
             // Ladataan sää kuvake näytölle
             Picasso.get()
                     .load(weatherStateImageUrl)
+                    .error(R.drawable.error_image)
                     .into(weatherStateImageView);
 
             // Päivitetään säätiedot näytölle
