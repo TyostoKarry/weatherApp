@@ -17,4 +17,5 @@
     <string name="temperature">Lämpötila</string>
     <string name="wind_speed">Tuulen nopeus</string>
     <string name="api_error">Virheellinen kaupungin nimi tai API Ongelma</string>
+    <string name="background_image">Kuva sovelluksen taustalle</string>
 </resources>

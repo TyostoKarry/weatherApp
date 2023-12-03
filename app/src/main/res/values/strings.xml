@@ -16,4 +16,5 @@
     <string name="temperature">temperature</string>
     <string name="wind_speed">Wind speed</string>
     <string name="api_error">Faulty city name or API Error</string>
+    <string name="background_image">Background image for application</string>
 </resources>
