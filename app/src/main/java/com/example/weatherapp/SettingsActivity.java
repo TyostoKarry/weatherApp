@@ -47,6 +47,8 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void backToMain(View view) {
+        // Lopeta kytkimen jatkuva kuuntelu
+        unitSwitch.setOnCheckedChangeListener(null);
         // Takaisin päänäkymään
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

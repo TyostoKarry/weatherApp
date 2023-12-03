@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -39,11 +40,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // Aktivoidaan picasson logit logcattiin
-        Picasso.Builder builder = new Picasso.Builder(this);
-        builder.loggingEnabled(true);
-        Picasso.setSingletonInstance(builder.build());
     }
 
     public void clearWeatherInfo() {
@@ -162,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
             // Päivitetään säätiedot näytölle
             TextView cityNameTextView = findViewById(R.id.cityNameTextView);
             cityNameTextView.setText(city);
+            cityName = city;
 
             TextView temperatureTextView = findViewById(R.id.temperatureTextView);
             TextView temperatureInfoTextView = findViewById(R.id.temperatureInfoTextView);
@@ -183,20 +180,19 @@ public class MainActivity extends AppCompatActivity {
         String foreca = "http://www.foreca.fi/" + cityName;
         Uri forecaUri = Uri.parse(foreca);
         Intent intent = new Intent(Intent.ACTION_VIEW, forecaUri);
-        // Tarkastetaan/varmistetaan onko laitteella tämän intentin toteuttava palvelu
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            // webbiselain löytyy
+
+        try {
             startActivity(intent);
-        }
-        else {
-            // ei webbiselainta, ei voida näyttää
+        } catch (ActivityNotFoundException e) {
+            clearWeatherInfo();
+            TextView cityNameTextView = findViewById(R.id.cityNameTextView);
+            cityNameTextView.setText("No internet access");
         }
     }
 
     public void openSettings(View view) {
         // Asetukset näkymään
         Intent intent = new Intent(this, SettingsActivity.class);
-        intent.putExtra("UNIT_TYPE", unitType);
         startActivity(intent); // Tämä komento käynnistää aktiviteetin
     }
 

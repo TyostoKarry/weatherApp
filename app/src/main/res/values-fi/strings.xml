@@ -16,5 +16,5 @@
     <string name="city_not_set">Kaupunkia ei asetettu</string>
     <string name="temperature">Lämpötila</string>
     <string name="wind_speed">Tuulen nopeus</string>
-    <string name="api_error">Virhe yhdistäessä API:in</string>
+    <string name="api_error">Virheellinen kaupungin nimi tai API Ongelma</string>
 </resources>
