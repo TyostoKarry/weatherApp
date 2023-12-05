@@ -186,7 +186,8 @@ public class MainActivity extends AppCompatActivity {
         } catch (ActivityNotFoundException e) {
             clearWeatherInfo();
             TextView cityNameTextView = findViewById(R.id.cityNameTextView);
-            cityNameTextView.setText("No internet access");
+            String noInternet = getResources().getString(R.string.no_internet_access);
+            cityNameTextView.setText(noInternet);
         }
     }
 
